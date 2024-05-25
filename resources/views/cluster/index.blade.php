@@ -14,31 +14,35 @@
                 </form>
             </div>
         </div>
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead class="bg-secondary text-white">
+                    <tr>
+                        <th class="col-md-1 text-center">NO</th>
+                        <th class="col-md-4 text-center">NAMA CLUSTER</th>
+                        <th class="col-md-4 text-center">CENTROID AWAL</th>
+                        <th class="col-md-2 text-center">AKSI</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($cluster as $i=> $c)
+                    <tr>
+                        <td scope="row" class="text-center">{{$i + 1}}</td>
+                        <td>{{$c->nama_cluster}}</td>
+                        <td class="text-center">
+                            <a class="btn btn-info" href="/cluster/pusatawal/{{ $c->id}}" type="button">Pusat Awal</a>
+                        </td>
+                        <td class="text-center">
+                            <a class="btn btn-success" href="/cluster/edit/{{ $c->id}}" type="button">Edit</a>
+                            <a href="/cluster/delete/{{ $c->id}}" class="btn btn-danger">Hapus</a>
+                        </td>
+                    </tr>
+                    @endforeach
+        </div>
+        <!-- Tambahkan baris sesuai kebutuhan -->
+        </tbody>
+    </table>
 </div>
-<thead>
-    <tr>
-        <th class="col-md-2">NO</th>
-        <th class="col-md-4">NAMA CLUSTER</th>
-        <th class="col-md-4">CENTROID AWAL</th>
-        <th class="col-md-2 text-center">AKSI</th>
-    </tr>
-</thead>
-<tbody>
-    @foreach($cluster as $i=> $c)
-    <tr>
-        <th scope="row">{{$i + 1}}</th>
-        <td>{{$c->nama_cluster}}</td>
-        <td>
-            <a class="btn btn-info" href="/cluster/pusatawal/{{ $c->id}}" type="button">Pusat Awal</a>
-        </td>
-        <td class="text-center">
-            <a class="btn btn-success" href="/cluster/edit/{{ $c->id}}" type="button">Edit</a>
-            <a href="/cluster/delete/{{ $c->id}}" class="btn btn-danger">Hapus</a>
-        </td>
-    </tr>
-    @endforeach
-    <!-- Tambahkan baris sesuai kebutuhan -->
-</tbody>
 </table>
 
 </div>

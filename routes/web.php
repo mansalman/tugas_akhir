@@ -64,6 +64,8 @@ Route::get('/cluster/tambah', [ClusterController::class, 'tambah']);
 
 Route::get('/cluster/pusatawal/{id}', [ClusterController::class, 'pusatawal']);
 
+// Route::get('/cluster/pusatawal/cari', [ClusterController::class, 'caripusatawal']);
+
 Route::put('/cluster/pusatawal/set/{id}', [ClusterController::class, 'setPusatAwal']);
 
 Route::post('/cluster/simpan', [ClusterController::class, 'simpan']);

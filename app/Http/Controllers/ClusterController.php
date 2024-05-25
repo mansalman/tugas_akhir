@@ -9,14 +9,18 @@ use Illuminate\Http\Request;
 class ClusterController extends Controller
 {
     public function index(Request $request){
-        if($request->get('cari')){
-            $cluster = Cluster::where('nama_cluster', 'like', '%' . $request->get('cari' ) . '%')->paginate(4);
-        } else {
-            $cluster = Cluster::paginate(4);
+        $query = Cluster::query();
+    
+        if ($request->has('cari')) {
+            $keyword = $request->get('cari');
+            $query->where('nama_cluster', 'like', '%' . $keyword . '%');
         }
-        return view('cluster.index', [
+    
+        $clusters = $query->paginate();
+    
+        return view('cluster/index', [
             'title' => 'Cluster',
-            'cluster' => $cluster
+            'cluster' => $clusters
         ]);
     }
     
@@ -65,6 +69,26 @@ class ClusterController extends Controller
         ]);
     }
 
+    // public function caripusatawal (Request $request){
+    //     if($request->has('cari')){
+    //         $keyword = $request->get('cari');
+    
+    //         $data = Cluster::where('niup', 'like', '%' . $keyword . '%')
+    //                     ->orWhere('nama_santri', 'like', '%' . $keyword . '%')
+    //                     ->orWhere('nilai_t', 'like', '%' . $keyword . '%')
+    //                     ->orWhere('nilai_f', 'like', '%' . $keyword . '%')
+    //                     ->orWhere('nilai_h', 'like', '%' . $keyword . '%')
+    //                     ->paginate();
+    //     } else {
+    //         $data = Cluster::paginate(50);
+    //     }
+    
+    //     return view('cluster/pusatawal', [
+    //         'title' => 'Cari Pusat Awal',
+    //         'data' => $data
+    //     ]);
+    // }
+    
     public function setPusatAwal(Request $request, $id)
     {
         $cl = Cluster::find($id);

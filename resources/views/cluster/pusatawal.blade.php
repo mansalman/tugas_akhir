@@ -22,28 +22,30 @@
                 </h6>
 
             </div>
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th class="col-md-2">NIUP</th>
-                        <th class="col-md-4">Nama Lengkap</th>
-                        <th class="col-md-2">Nilai Tajwid</th>
-                        <th class="col-md-2">Nilai Fashohah</th>
-                        <th class="col-md-2">Nilai Hafalan</th>
-                    </tr>
-                <tbody>
-                    @if($cluster->data)
-                    <tr>
-                        <td>{{$cluster->data->niup}}</td>
-                        <td>{{$cluster->data->nama_santri}}</td>
-                        <td>{{$cluster->data->nilai_t}}</td>
-                        <td>{{$cluster->data->nilai_f}}</td>
-                        <td>{{$cluster->data->nilai_h}}</td>
-                    </tr>
-                    @endif
-                </tbody>
-                </thead>
-            </table>
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead class="bg-secondary text-white">
+                        <tr>
+                            <th class="col-md-2 text-center">NIUP</th>
+                            <th class="col-md-4 text-center">NAMA LENGKAP</th>
+                            <th class="col-md-2 text-center">NILAI TAJWID</th>
+                            <th class="col-md-2 text-center">NILAI FASHOHAH</th>
+                            <th class="col-md-2 text-center">NILAI HAFALAN</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if($cluster->data)
+                        <tr>
+                            <td class="text-center">{{$cluster->data->niup}}</td>
+                            <td>{{$cluster->data->nama_santri}}</td>
+                            <td class="text-center">{{$cluster->data->nilai_t}}</td>
+                            <td class="text-center">{{$cluster->data->nilai_f}}</td>
+                            <td class="text-center">{{$cluster->data->nilai_h}}</td>
+                        </tr>
+                        @endif
+                    </tbody>
+                </table>
+            </div>
         </div>
 
         <div class="my-3 p-3 bg-body rounded shadow-sm">
@@ -52,43 +54,46 @@
                     <p class="text-center">Pilih Centroid Pusat Awal</p>
                 </h6>
             </div>
-            <div class="pb-3">
-                <form class="d-flex" action="/cluster/pusatawal" method="get">
+            <!-- <div class="pb-3">
+                <form class="d-flex" action="/cluster/pusatawal/cari" method="get">
                     <input class="form-control me-1" type="search" name="cari" value="{{ request('cari') }}"
                         placeholder="Masukkan kata kunci" aria-label="Search">
                 </form>
+            </div> -->
+
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead class="bg-secondary text-white">
+                        <tr>
+                            <th class="col-md-2 text-center">NIUP</th>
+                            <th class="col-md-3 text-center">NAMA LENGKAP</th>
+                            <th class="col-md-2 text-center">NILAI TAJWID</th>
+                            <th class="col-md-2 text-center">NILAI FASHOHAH</th>
+                            <th class="col-md-2 text-center">NILAI HAFALAN</th>
+                            <th class="col-md-1 text-center">PILIH</th>
+                        </tr>
+                    <tbody>
+                        @foreach($data as $i=>$d)
+                        <tr>
+                            <td class="text-center">{{$d->niup}}</td>
+                            <td>{{$d->nama_santri}}</td>
+                            <td class="text-center">{{$d->nilai_t}}</td>
+                            <td class="text-center">{{$d->nilai_f}}</td>
+                            <td class="text-center">{{$d->nilai_h}}</td>
+                            <td>
+                                <form action="/cluster/pusatawal/set/{{ $cluster->id }}" method="POST">
+                                    @csrf
+                                    @method('PUT')
+                                    <input type="hidden" name="id_data" value="{{ $d->id }}">
+                                    <button type="submit" class="btn btn-info">Pilih</button>
+                                </form>
+                            </td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                    </thead>
+                </table>
             </div>
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th class="col-md-2">NIUP</th>
-                        <th class="col-md-3">Nama Lengkap</th>
-                        <th class="col-md-2">Nilai Tajwid</th>
-                        <th class="col-md-2">Nilai Fashohah</th>
-                        <th class="col-md-2">Nilai Hafalan</th>
-                        <th class="col-md-1">Pilih</th>
-                    </tr>
-                <tbody>
-                    @foreach($data as $i=>$d)
-                    <tr>
-                        <td>{{$d->niup}}</td>
-                        <td>{{$d->nama_santri}}</td>
-                        <td>{{$d->nilai_t}}</td>
-                        <td>{{$d->nilai_f}}</td>
-                        <td>{{$d->nilai_h}}</td>
-                        <td>
-                            <form action="/cluster/pusatawal/set/{{ $cluster->id }}" method="POST">
-                                @csrf
-                                @method('PUT')
-                                <input type="hidden" name="id_data" value="{{ $d->id }}">
-                                <button type="submit" class="btn btn-info">Pilih</button>
-                            </form>
-                        </td>
-                    </tr>
-                    @endforeach
-                </tbody>
-                </thead>
-            </table>
         </div>
 
         @endsection

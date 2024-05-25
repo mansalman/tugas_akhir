@@ -2,18 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Cluster;
-use App\Models\Data;
-use App\Models\Kmeans;
 use Illuminate\Http\Request;
-use Illuminate\Support\Arr;
 
-class KmeansController extends Controller
-
+class BackupDuaKmeansController extends Controller
 {
     public function kmeans()
     {
-    $dataAll = Data::all();
+        $dataAll = Data::all();
     $dipilih = Cluster::with('data')->get();
 
     // Inisialisasi centroid awal dari clusters yang dipilih
@@ -53,8 +48,6 @@ class KmeansController extends Controller
         $iterations[] = [
             'data' => $dataAll->map(function($item) {
                 return [
-                    'niup' => $item->niup,
-                    'nama_santri' => $item->nama_santri,
                     'nilai_t' => $item->nilai_t,
                     'nilai_f' => $item->nilai_f,
                     'nilai_h' => $item->nilai_h,
@@ -105,11 +98,9 @@ class KmeansController extends Controller
             $centroids = $newCentroids;
         }
     }
-    // dd($iterations);
-    return view('kmeans/baru', [
-        'title' => 'Kmeans',
-        'iterations' => $iterations,
-        'hasil' => end($iterations),
+
+    return view('kmeans.baru', [
+        'iterations' => $iterations
     ]);
 }   
 }

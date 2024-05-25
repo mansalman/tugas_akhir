@@ -11,11 +11,19 @@ class DataController extends Controller
 {                           
 
     public function index(Request $request){
-        if($request->get('cari')){
-            $data = Data::where('niup', 'like', '%' . $request->get('cari' ) . '%')->orWhere('nama_santri', 'like', 'wilayah', 'like', 'daerah', 'like', 'lembaga', 'like', '%' . $request->get('cari' ) . '%')->paginate();
+        if($request->has('cari')){
+            $keyword = $request->get('cari');
+    
+            $data = Data::where('niup', 'like', '%' . $keyword . '%')
+                        ->orWhere('nama_santri', 'like', '%' . $keyword . '%')
+                        ->orWhere('wilayah', 'like', '%' . $keyword . '%')
+                        ->orWhere('daerah', 'like', '%' . $keyword . '%')
+                        ->orWhere('lembaga', 'like', '%' . $keyword . '%')
+                        ->paginate();
         } else {
             $data = Data::paginate(50);
         }
+    
         return view('data.index', [
             'title' => 'Data',
             'data' => $data

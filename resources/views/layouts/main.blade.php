@@ -11,6 +11,37 @@
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
     <title>Algoritma K-Means | {{ $title }}</title>
+
+    <style>
+    body {
+        background-color: #f8f9fa;
+    }
+
+    .card-custom {
+        border-radius: 15px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        background-color: #fff;
+        /* Bootstrap secondary color */
+        color: #000;
+    }
+
+    .table-responsive {
+        max-height: 375px;
+        overflow-y: auto;
+    }
+
+    .table-responsive thead {
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        /* Ensure the header stays above the body content */
+    }
+
+    thead th {
+        background-color: #000;
+        /* Match Bootstrap's thead-dark background */
+    }
+    </style>
 </head>
 
 <body>
